@@ -1,0 +1,1002 @@
+create table Publishers (
+Location varchar(50),
+Phone varchar(12),
+Name varchar(50) NOT NULL,
+primary key (Name));
+
+create table Books (
+ISBN varchar(13) NOT NULL, 
+Title varchar(50) NOT NULL,
+primary key(ISBN));
+
+create table Bookstore (
+Location varchar(50) NOT NULL,
+Phone varchar(12),
+primary key(Location));
+
+create table Orders (
+Order_ID INT NOT NULL,
+Purchase_Date DATE,
+primary key(Order_ID));
+
+create table Customer (
+Phone varchar(12),
+Credit_Card varchar(16),
+Sex varchar(1),
+Address varchar(50),
+Customer_ID INT NOT NULL,
+Interests varchar(50),
+Birthday DATE,
+First_Name varchar(20) NOT NULL,
+Middle_Name varchar(20),
+Last_Name varchar(20) NOT NULL,
+primary key(Customer_ID));
+
+create table Purchased_By (
+Customer_ID INT NOT NULL,
+Order_ID INT NOT NULL,
+foreign key(Customer_ID) references Customer(Customer_ID),
+foreign key(Order_ID) references Orders(Order_ID));
+
+create table Contained_In (
+Purchase_Price REAL NOT NULL,
+ISBN varchar(13) NOT NULL,
+Order_ID INT NOT NULL,
+foreign key(Order_ID) references Orders(Order_ID),
+foreign key(ISBN) references Books(ISBN));
+
+create table Stocked_At (
+Location varchar(50) NOT NULL,
+ISBN varchar(13) NOT NULL,
+Quantity INT NOT NULL,
+foreign key(ISBN) references Books(ISBN),
+foreign key(Location) references Bookstore(Location));
+
+create table Genre (
+ISBN varchar(13) NOT NULL,
+Name varchar(50) NOT NULL,
+foreign key(ISBN) references Books(ISBN));
+
+create table Author (
+ISBN varchar(13) NOT NULL,
+Name varchar(50) NOT NULL,
+foreign key(ISBN) references Books(ISBN));
+
+create table Published (
+Publisher_Name varchar(50) NOT NULL,
+ISBN varchar(13) NOT NULL,
+Year INT,
+foreign key(Publisher_Name) references Publishers(Name),
+foreign key(ISBN) references Books(ISBN));
+
+
+insert into Books (ISBN,Title) values('782140661','OCP: Oracle9i Certification Kit');
+insert into Author(ISBN,Name) values('782140661','Chip Dawes');
+insert into Publishers(Location,Phone,Name) values('','','Sybex');
+insert into Published (Publisher_Name,ISBN,Year) values('Sybex','782140661',2002);
+insert into Genre(ISBN,Name) values ('782140661','Computer');
+insert into Orders(Order_ID,Purchase_Date) values (1,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (104.97,'782140661',1);
+insert into Author(ISBN,Name) values('782140661','Biju Thomas');
+insert into Author(ISBN,Name) values('782140661','Doug Stuns');
+insert into Author(ISBN,Name) values('782140661','Matthew Weishan');
+insert into Author(ISBN,Name) values('782140661','Joseph C. Johnson');
+insert into Books (ISBN,Title) values('72227885','SQL Server 2000 for Experienced DBA''s');
+insert into Author(ISBN,Name) values('72227885','Brian Knight');
+insert into Publishers(Location,Phone,Name) values('','','McGraw-Hill Osborne Media');
+insert into Published (Publisher_Name,ISBN,Year) values('McGraw-Hill Osborne Media','72227885',2003);
+insert into Genre(ISBN,Name) values ('72227885','Computer');
+insert into Orders(Order_ID,Purchase_Date) values (2,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (34.99,'72227885',2);
+insert into Books (ISBN,Title) values('471200247','The Data Warehouse Toolkit: The Complete Guide to Dimensional Modeling');
+insert into Author(ISBN,Name) values('471200247','Ralph Kimball');
+insert into Publishers(Location,Phone,Name) values('','','John Wiley & Sons');
+insert into Published (Publisher_Name,ISBN,Year) values('John Wiley & Sons','471200247',2002);
+insert into Genre(ISBN,Name) values ('471200247','Computer');
+insert into Orders(Order_ID,Purchase_Date) values (3,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (50.00,'471200247',3);
+insert into Author(ISBN,Name) values('471200247','Margy Ross');
+insert into Books (ISBN,Title) values('72227710','How To Do Everything with Your Tablet PC');
+insert into Author(ISBN,Name) values('72227710','Bill Mann');
+
+insert into Published (Publisher_Name,ISBN,Year) values('McGraw-Hill Osborne Media','72227710',2003);
+insert into Genre(ISBN,Name) values ('72227710','Computer');
+insert into Orders(Order_ID,Purchase_Date) values (4,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (17.49,'72227710',4);
+insert into Books (ISBN,Title) values('1558605525','Data Mining: Practical Machine Learning Tools and Techniques with Java Implementations');
+insert into Author(ISBN,Name) values('1558605525','Ian H. Witten');
+insert into Publishers(Location,Phone,Name) values('','','Morgan Kaufmann');
+insert into Published (Publisher_Name,ISBN,Year) values('Morgan Kaufmann','1558605525',1999);
+insert into Genre(ISBN,Name) values ('1558605525','Computer');
+insert into Orders(Order_ID,Purchase_Date) values (5,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (49.95,'1558605525',5);
+insert into Author(ISBN,Name) values('1558605525','Eibe Frank');
+insert into Books (ISBN,Title) values('972263608','Creating Documents with BusinessObjects 5.1');
+insert into Author(ISBN,Name) values('972263608','Robert D. Schmidt');
+insert into Publishers(Location,Phone,Name) values('','','Schmidt Ink, Inc.');
+insert into Published (Publisher_Name,ISBN,Year) values('Schmidt Ink, Inc','972263608', 2002);
+insert into Genre(ISBN,Name) values ('972263608','Computer');
+insert into Orders(Order_ID,Purchase_Date) values (6,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (99.00,'972263608',6);
+insert into Books (ISBN,Title) values('201615762','The Guru''s Guide to Transact-SQL');
+insert into Author(ISBN,Name) values('201615762','Ken Henderson');
+insert into Publishers(Location,Phone,Name) values('','','Addison-Wesley Pub Co');
+insert into Published (Publisher_Name,ISBN,Year) values('Addison-Wesley Pub Co','201615762',2000);
+insert into Genre(ISBN,Name) values ('201615762','Computer');
+insert into Orders(Order_ID,Purchase_Date) values (7,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (38.49,'201615762',7);
+insert into Books (ISBN,Title) values('782140114','Access 2002 Developer''s Handbook Set');
+insert into Author(ISBN,Name) values('782140114','Paul Litwin');
+
+insert into Published (Publisher_Name,ISBN,Year) values('Sybex','782140114',2001);
+insert into Genre(ISBN,Name) values ('782140114','Computer');
+insert into Orders(Order_ID,Purchase_Date) values (8,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (69.99,'782140114',8);
+insert into Author(ISBN,Name) values('782140114','Ken Getz');
+insert into Author(ISBN,Name) values('782140114','Mike Gunderloy');
+insert into Books (ISBN,Title) values('321125169','ColdFusion MX Web Application Construction Kit');
+insert into Author(ISBN,Name) values('321125169','Ben Forta');
+insert into Publishers(Location,Phone,Name) values('','','Macromedia Press');
+insert into Published (Publisher_Name,ISBN,Year) values('Macromedia Press','321125169',2002);
+insert into Genre(ISBN,Name) values ('321125169','Computer');
+insert into Orders(Order_ID,Purchase_Date) values (9,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (38.49,'321125169',9);
+insert into Author(ISBN,Name) values('321125169','Nate Weiss');
+insert into Author(ISBN,Name) values('321125169','Leon Chalnick');
+insert into Author(ISBN,Name) values('321125169','Angela C. Buraglia');
+insert into Books (ISBN,Title) values('805317554','Fundamentals of Database Systems');
+insert into Author(ISBN,Name) values('805317554','Ramez A. Elmasri');
+insert into Publishers(Location,Phone,Name) values('','','Addison-Wesley Publishing');
+insert into Published (Publisher_Name,ISBN,Year) values('Addison-Wesley Publishing','805317554',1999);
+insert into Genre(ISBN,Name) values ('805317554','Computer');
+insert into Orders(Order_ID,Purchase_Date) values (10,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (95.00,'805317554',10);
+insert into Author(ISBN,Name) values('805317554','Shamkant B. Navathe');
+insert into Books (ISBN,Title) values('1861004486','Professional SQL Server 2000 Programming');
+insert into Author(ISBN,Name) values('1861004486','Rob Vieira');
+insert into Publishers(Location,Phone,Name) values('','','Wrox Press Inc');
+insert into Published (Publisher_Name,ISBN,Year) values('Wrox Press Inc','1861004486',2000);
+insert into Genre(ISBN,Name) values ('1861004486','Computer');
+insert into Orders(Order_ID,Purchase_Date) values (11,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (41.99,'1861004486',11);
+insert into Books (ISBN,Title) values('735712123','MySQL');
+insert into Author(ISBN,Name) values('735712123','Paul DuBois');
+
+insert into Published (Publisher_Name,ISBN,Year) values('Addison-Wesley Publishing','735712123',2003);
+insert into Genre(ISBN,Name) values ('735712123','Computer');
+insert into Orders(Order_ID,Purchase_Date) values (12,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (34.99,'735712123',12);
+insert into Books (ISBN,Title) values('425188361','Cerulean Sins');
+insert into Author(ISBN,Name) values('425188361','Laurell K. Hamilton');
+insert into Publishers(Location,Phone,Name) values('','','Berkley Pub Group');
+insert into Published (Publisher_Name,ISBN,Year) values('Berkley Pub Group','425188361',2003);
+insert into Genre(ISBN,Name) values ('425188361','Literature & Fiction');
+insert into Orders(Order_ID,Purchase_Date) values (13,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (16.07,'425188361',13);
+insert into Books (ISBN,Title) values('142001740','The Secret Life of Bees');
+insert into Author(ISBN,Name) values('142001740','Sue Monk Kidd');
+insert into Publishers(Location,Phone,Name) values('','','Penguin USA');
+insert into Published (Publisher_Name,ISBN,Year) values('Penguin USA','142001740',2003);
+insert into Genre(ISBN,Name) values ('142001740','Literature & Fiction');
+insert into Orders(Order_ID,Purchase_Date) values (14,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (14.00,'142001740',14);
+insert into Books (ISBN,Title) values('596004478','Google Hacks');
+insert into Author(ISBN,Name) values('596004478','Tara Calishain');
+insert into Publishers(Location,Phone,Name) values('','','O''Reilly & Associates');
+insert into Published (Publisher_Name,ISBN,Year) values('O''Reilly & Associates','596004478',2003);
+insert into Genre(ISBN,Name) values ('596004478','Computer');
+insert into Orders(Order_ID,Purchase_Date) values (15,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (24.95,'596004478',15);
+insert into Author(ISBN,Name) values('596004478','Rael Dornfest');
+insert into Books (ISBN,Title) values('71414339','Investing in Fixer-Uppers : A Complete Guide to Buying LowFixing Smart,Adding Value,and Selling(or Renting) High');
+insert into Author(ISBN,Name) values('71414339', 'Jay P. Decima');
+insert into Publishers(Location,Phone,Name) values('','',' McGraw-Hill Trade');
+insert into Published (Publisher_Name,ISBN,Year) values('McGraw-Hill Trade','71414339',2003);
+insert into Genre(ISBN,Name) values ('71414339','Accounting & Finance');
+insert into Orders(Order_ID,Purchase_Date) values (16,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (18.95,'71414339',16);
+insert into Books (ISBN,Title) values('312311354','The Pianist');
+insert into Author(ISBN,Name) values('312311354','Wladyslaw Szpilman');
+insert into Publishers(Location,Phone,Name) values('','','Picador');
+insert into Published (Publisher_Name,ISBN,Year) values('Picador','312311354',2003);
+insert into Genre(ISBN,Name) values ('312311354','Literature & Fiction');
+insert into Orders(Order_ID,Purchase_Date) values (17,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (13.00,'312311354',17);
+insert into Books (ISBN,Title) values('312287941','The Girl in the Red Coat: A Memoir');
+insert into Author(ISBN,Name) values('312287941','Roma Ligocka');
+insert into Publishers(Location,Phone,Name) values('','','St. Martin''s Press');
+insert into Published (Publisher_Name,ISBN,Year) values('St. Martin''s Press','312287941',2002);
+insert into Genre(ISBN,Name) values ('312287941','Literature & Fiction');
+insert into Orders(Order_ID,Purchase_Date) values (18,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (25.95,'312287941',18);
+insert into Books (ISBN,Title) values('312243022','The Hours');
+insert into Author(ISBN,Name) values('312243022','Michael Cunningham');
+
+insert into Published (Publisher_Name,ISBN,Year) values('Picador','312243022',2000);
+insert into Genre(ISBN,Name) values ('312243022','Literature & Fiction');
+insert into Orders(Order_ID,Purchase_Date) values (19,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (3.44,'312243022',19);
+insert into Books (ISBN,Title) values('609610570','Execution: The Discipline of Getting Things Done');
+insert into Author(ISBN,Name) values('609610570','Larry Bossidy');
+insert into Publishers(Location,Phone,Name) values('','','Crown Pub');
+insert into Published (Publisher_Name,ISBN,Year) values('Crown Pub','609610570',2002);
+insert into Genre(ISBN,Name) values ('609610570','Reference');
+insert into Orders(Order_ID,Purchase_Date) values (20,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (27.50,'609610570',20);
+insert into Author(ISBN,Name) values('609610570','Ram Charan');
+insert into Author(ISBN,Name) values('609610570','Charles Burck');
+insert into Books (ISBN,Title) values('316602051','The Jester');
+insert into Author(ISBN,Name) values('316602051','James Patterson');
+insert into Publishers(Location,Phone,Name) values('','','Little Brown & Company');
+insert into Published (Publisher_Name,ISBN,Year) values('Little Brown & Company','316602051',2003);
+insert into Genre(ISBN,Name) values ('316602051','Literature & Fiction');
+insert into Orders(Order_ID,Purchase_Date) values (21,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (27.95,'316602051',21);
+insert into Author(ISBN,Name) values('316602051','Andrew Gross');
+insert into Books (ISBN,Title) values('743222008','The Vanished Man: A Lincoln Rhyme Novel');
+insert into Author(ISBN,Name) values('743222008','Jeffery Deaver');
+
+insert into Published (Publisher_Name,ISBN,Year) values('Simon & Schuster','743222008',2003);
+insert into Genre(ISBN,Name) values ('743222008','Literature & Fiction');
+insert into Orders(Order_ID,Purchase_Date) values (22,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (25.00,'743222008',22);
+insert into Books (ISBN,Title) values('66214750','Twelve Times Blessed');
+insert into Author(ISBN,Name) values('66214750','Jacquelyn Mitchard');
+insert into Publishers(Location,Phone,Name) values('','','HarperCollins');
+insert into Published (Publisher_Name,ISBN,Year) values('HarperCollins','66214750',2003);
+insert into Genre(ISBN,Name) values ('66214750','Literature & Fiction');
+insert into Orders(Order_ID,Purchase_Date) values (23,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (25.95,'66214750',23);
+insert into Books (ISBN,Title) values('787960756','The Five Dysfunctions of a Team: A Leadership Fable');
+insert into Author(ISBN,Name) values('787960756','Patrick Lencioni');
+insert into Publishers(Location,Phone,Name) values('','','Jossey-Bass');
+insert into Published (Publisher_Name,ISBN,Year) values('Jossey-Bass','787960756',2002);
+insert into Genre(ISBN,Name) values ('787960756','Accounting & Finance');
+insert into Orders(Order_ID,Purchase_Date) values (24,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (13.20,'787960756',24);
+insert into Books (ISBN,Title) values('7432060610','The Second Time Around');
+insert into Author(ISBN,Name) values('7432060610','Mary Higgins Clark');
+
+insert into Published (Publisher_Name,ISBN,Year) values('Simon & Schuster','7432060610',2003);
+insert into Genre(ISBN,Name) values ('7432060610','Accounting & Finance');
+insert into Orders(Order_ID,Purchase_Date) values (25,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (26.00,'7432060610',25);
+insert into Books (ISBN,Title) values('1590520734','The Rescuer: The O''Malley Series');
+insert into Author(ISBN,Name) values('1590520734','Dee Henderson');
+insert into Publishers(Location,Phone,Name) values('','','Multnomah Publishers Inc.');
+insert into Published (Publisher_Name,ISBN,Year) values('Multnomah Publishers Inc.','1590520734',2003);
+insert into Genre(ISBN,Name) values ('1590520734','Romance');
+insert into Orders(Order_ID,Purchase_Date) values (26,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (12.99,'1590520734',26);
+insert into Books (ISBN,Title) values('60934417','Bel Canto: A Novel');
+insert into Author(ISBN,Name) values('60934417','Ann Patchett');
+insert into Publishers(Location,Phone,Name) values('','','Perennial');
+insert into Published (Publisher_Name,ISBN,Year) values('Perennial','60934417',2002);
+insert into Genre(ISBN,Name) values ('60934417','Romance');
+insert into Orders(Order_ID,Purchase_Date) values (27,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (13.95,'60934417',27);
+insert into Books (ISBN,Title) values('440237556','The Dark Highlander');
+insert into Author(ISBN,Name) values('440237556','Karen Marie Moning');
+insert into Publishers(Location,Phone,Name) values('','','Dell Pub Co');
+insert into Published (Publisher_Name,ISBN,Year) values('Dell Pub Co','440237556',2002);
+insert into Genre(ISBN,Name) values ('440237556','Romance');
+insert into Orders(Order_ID,Purchase_Date) values (28,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (6.99,'440237556',28);
+insert into Books (ISBN,Title) values('373272839','Letters to Kelly');
+insert into Author(ISBN,Name) values('373272839','Suzanne Brockmann');
+insert into Publishers(Location,Phone,Name) values('','','Harlequin');
+insert into Published (Publisher_Name,ISBN,Year) values('Harlequin','373272839',2003);
+insert into Genre(ISBN,Name) values ('373272839','Romance');
+insert into Orders(Order_ID,Purchase_Date) values (29,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (4.75,'373272839',29);
+insert into Books (ISBN,Title) values('670031518','The Blank Slate: The Modern Denial of Human Nature');
+insert into Author(ISBN,Name) values('670031518','Steven Pinker');
+insert into Publishers(Location,Phone,Name) values('','','Viking Press');
+insert into Published (Publisher_Name,ISBN,Year) values('Viking Press','670031518',2002);
+insert into Genre(ISBN,Name) values ('670031518','Science');
+insert into Orders(Order_ID,Purchase_Date) values (30,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (27.95,'670031518',30);
+insert into Books (ISBN,Title) values('738206679','Linked: The New Science of Networks');
+insert into Author(ISBN,Name) values('738206679','Albert-László Barabási');
+insert into Publishers(Location,Phone,Name) values('','','Perseus Publishing');
+insert into Published (Publisher_Name,ISBN,Year) values('Perseus Publishing','738206679',2002);
+insert into Genre(ISBN,Name) values ('738206679','Science');
+insert into Orders(Order_ID,Purchase_Date) values (31,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (26.00,'738206679',31);
+insert into Books (ISBN,Title) values('067976867X','Consilience: The Unity of Knowledge');
+insert into Author(ISBN,Name) values('067976867X','Edward Osborne Wilson');
+insert into Publishers(Location,Phone,Name) values('','','Random House');
+insert into Published (Publisher_Name,ISBN,Year) values('Random House','067976867X',1999);
+insert into Genre(ISBN,Name) values ('067976867X','Science');
+insert into Orders(Order_ID,Purchase_Date) values (32,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (15.00,'067976867X',32);
+insert into Books (ISBN,Title) values('679450785','The Future of Life');
+insert into Author(ISBN,Name) values('679450785','Edward Osborne Wilson');
+insert into Publishers(Location,Phone,Name) values('','','Knopf');
+insert into Published (Publisher_Name,ISBN,Year) values('Knopf','679450785',2002);
+insert into Genre(ISBN,Name) values ('679450785','Science');
+insert into Orders(Order_ID,Purchase_Date) values (33,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (22.00,'679450785',33);
+insert into Books (ISBN,Title) values('1579550088','A New Kind of Science');
+insert into Author(ISBN,Name) values('1579550088','Stephen Wolfram');
+insert into Publishers(Location,Phone,Name) values('','','Wolfram Media, Inc.');
+insert into Published (Publisher_Name,ISBN,Year) values('Wolfram Media, Inc.','1579550088', 2002);
+insert into Genre(ISBN,Name) values ('1579550088','Science');
+insert into Orders(Order_ID,Purchase_Date) values (34,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (44.95,'1579550088',34);
+insert into Books (ISBN,Title) values('684843285','ON FOOD AND COOKING');
+insert into Author(ISBN,Name) values('684843285','Harold McGee');
+insert into Publishers(Location,Phone,Name) values('','','Fireside');
+insert into Published (Publisher_Name,ISBN,Year) values('Fireside','684843285',1997);
+insert into Genre(ISBN,Name) values ('684843285','Science');
+insert into Orders(Order_ID,Purchase_Date) values (35,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (22.00,'684843285',35);
+insert into Books (ISBN,Title) values('471358983','Building Construction Illustrated');
+insert into Author(ISBN,Name) values('471358983','Francis D. K. Ching');
+
+insert into Published (Publisher_Name,ISBN,Year) values('John Wiley & Sons','471358983',2000);
+insert into Genre(ISBN,Name) values ('471358983','Home Design');
+insert into Orders(Order_ID,Purchase_Date) values (36,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (40.00,'471358983',36);
+insert into Author(ISBN,Name) values('471358983','Cassandra Adams');
+insert into Books (ISBN,Title) values('394739698','A Field Guide to American Houses');
+insert into Author(ISBN,Name) values('394739698','Virginia McAlester');
+insert into Publishers(Location,Phone,Name) values('','','Random House Trade Paperbacks');
+insert into Published (Publisher_Name,ISBN,Year) values('Random House Trade Paperbacks','394739698',1984);
+insert into Genre(ISBN,Name) values ('394739698','Home Design');
+insert into Orders(Order_ID,Purchase_Date) values (37,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (24.95,'394739698',37);
+insert into Author(ISBN,Name) values('394739698','Lee McAlester');
+insert into Books (ISBN,Title) values('1586851322','Prefab');
+insert into Author(ISBN,Name) values('1586851322','Bryan Burkhart');
+insert into Publishers(Location,Phone,Name) values('','','Gibbs Smith Publisher');
+insert into Published (Publisher_Name,ISBN,Year) values('Gibbs Smith Publisher','1586851322',2002);
+insert into Genre(ISBN,Name) values ('1586851322','Home Design');
+insert into Orders(Order_ID,Purchase_Date) values (38,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (39.95,'1586851322',38);
+insert into Author(ISBN,Name) values('1586851322','Allison Arieff');
+insert into Books (ISBN,Title) values('1586851357','Cabins & Camps');
+insert into Author(ISBN,Name) values('1586851357','Ralph R. Kylloe');
+
+insert into Published (Publisher_Name,ISBN,Year) values('Gibbs Smith Publisher','1586851357',2002);
+insert into Genre(ISBN,Name) values ('1586851357','Home Design');
+insert into Orders(Order_ID,Purchase_Date) values (39,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (60.00,'1586851357',39);
+insert into Books (ISBN,Title) values('156158648X','The New City Home: Smart Solutions for Metro Living');
+insert into Author(ISBN,Name) values('156158648X','Leslie Plummer Clagett');
+insert into Publishers(Location,Phone,Name) values('','','Taunton Pr');
+insert into Published (Publisher_Name,ISBN,Year) values('Taunton Pr','156158648X',2003);
+insert into Genre(ISBN,Name) values ('156158648X','Home Design');
+insert into Orders(Order_ID,Purchase_Date) values (40,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (24.95,'156158648X',40);
+insert into Books (ISBN,Title) values('865659982','Composers'' Houses');
+insert into Author(ISBN,Name) values('865659982','Gerard Gefen');
+insert into Publishers(Location,Phone,Name) values('','','Vendome Pr');
+insert into Published (Publisher_Name,ISBN,Year) values('Vendome Pr','865659982',1998);
+insert into Genre(ISBN,Name) values ('865659982','Home Design');
+insert into Orders(Order_ID,Purchase_Date) values (41,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (50.00,'865659982',41);
+insert into Author(ISBN,Name) values('865659982','Christine Bastin');
+insert into Author(ISBN,Name) values('865659982','Jacques Evrard');
+insert into Books (ISBN,Title) values('517576600','Color: Natural Palettes for Painted Rooms');
+insert into Author(ISBN,Name) values('517576600','Donald Kaufman');
+insert into Publishers(Location,Phone,Name) values('','','Clarkson N. Potter');
+insert into Published (Publisher_Name,ISBN,Year) values('Clarkson N. Potter','517576600',1992);
+insert into Genre(ISBN,Name) values ('517576600','Home Design');
+insert into Orders(Order_ID,Purchase_Date) values (42,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (50.00,'517576600',42);
+insert into Author(ISBN,Name) values('517576600','Taffy Dahl');
+insert into Author(ISBN,Name) values('517576600','Laurel Graeber');
+insert into Author(ISBN,Name) values('517576600','Tina Freeman');
+insert into Books (ISBN,Title) values('262024829','Financial Modeling');
+insert into Author(ISBN,Name) values('262024829','Simon Benninga');
+insert into Publishers(Location,Phone,Name) values('','','MIT Press');
+insert into Published (Publisher_Name,ISBN,Year) values('MIT Press','262024829',2000);
+insert into Genre(ISBN,Name) values ('262024829','Accounting & Finance');
+insert into Orders(Order_ID,Purchase_Date) values (43,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (70.00,'262024829',43);
+insert into Books (ISBN,Title) values('72294337','Financial Markets & Corporate Strategy');
+insert into Author(ISBN,Name) values('72294337','Mark Grinblatt');
+insert into Publishers(Location,Phone,Name) values('','','McGraw-Hill/Irwin');
+insert into Published (Publisher_Name,ISBN,Year) values('McGraw-Hill/Irwin','72294337',2001);
+insert into Genre(ISBN,Name) values ('72294337','Accounting & Finance');
+insert into Orders(Order_ID,Purchase_Date) values (44,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (122.50,'72294337',44);
+insert into Author(ISBN,Name) values('72294337','Sheridan Titman');
+insert into Books (ISBN,Title) values('72315318','Analysis for Financial Management');
+insert into Author(ISBN,Name) values('72315318','Robert C. Higgins');
+
+insert into Published (Publisher_Name,ISBN,Year) values('McGraw-Hill/Irwin','72315318',2000);
+insert into Genre(ISBN,Name) values ('72315318','Accounting & Finance');
+insert into Orders(Order_ID,Purchase_Date) values (45,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (79.20,'72315318',45);
+insert into Books (ISBN,Title) values('324107501','Advanced Accounting');
+insert into Author(ISBN,Name) values('324107501','Paul Marcus Fischer');
+insert into Publishers(Location,Phone,Name) values('','','South-Western College Pub');
+insert into Published (Publisher_Name,ISBN,Year) values('South-Western College Pub','324107501',2001);
+insert into Genre(ISBN,Name) values ('324107501','Accounting & Finance');
+insert into Orders(Order_ID,Purchase_Date) values (46,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (112.95,'324107501',46);
+insert into Author(ISBN,Name) values('324107501','William James Taylor');
+insert into Author(ISBN,Name) values('324107501','Rita Hartung Cheng');
+insert into Books (ISBN,Title) values('471363049','Intermediate Accounting');
+insert into Author(ISBN,Name) values('471363049','Donald E. Kieso');
+
+insert into Published (Publisher_Name,ISBN,Year) values('John Wiley & Sons','471363049',2001);
+insert into Genre(ISBN,Name) values ('471363049','Accounting & Finance');
+insert into Orders(Order_ID,Purchase_Date) values (47,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (139.20,'471363049',47);
+insert into Author(ISBN,Name) values('471363049','Jerry J. Weygandt');
+insert into Author(ISBN,Name) values('471363049','Terry D. Warfield');
+insert into Books (ISBN,Title) values('130323519','Financial Reporting and Analysis');
+insert into Author(ISBN,Name) values('130323519','Lawrence Revsine');
+insert into Publishers(Location,Phone,Name) values('','','Prentice Hall');
+insert into Published (Publisher_Name,ISBN,Year) values('Prentice Hall','130323519',2001);
+insert into Genre(ISBN,Name) values ('130323519','Accounting & Finance');
+insert into Orders(Order_ID,Purchase_Date) values (48,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (126.67,'130323519',48);
+insert into Author(ISBN,Name) values('130323519','Daniel W. Collins');
+insert into Author(ISBN,Name) values('130323519','W. Bruce Johnson');
+insert into Books (ISBN,Title) values('446527793','The Guardian');
+insert into Author(ISBN,Name) values('446527793','Nicholas Sparks');
+insert into Publishers(Location,Phone,Name) values('','','Warner Books');
+insert into Published (Publisher_Name,ISBN,Year) values('Warner Books','446527793',2003);
+insert into Genre(ISBN,Name) values ('446527793','Literature & Fiction');
+insert into Orders(Order_ID,Purchase_Date) values (49,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (24.95,'446527793',49);
+insert into Books (ISBN,Title) values('743206061','The Second Time Around');
+insert into Author(ISBN,Name) values('743206061','Mary Higgins Clark');
+insert into Publishers(Location,Phone,Name) values('','','Simon & Schuster');
+insert into Published (Publisher_Name,ISBN,Year) values('Simon & Schuster','743206061',2003);
+insert into Genre(ISBN,Name) values ('743206061','Literature & Fiction');
+insert into Orders(Order_ID,Purchase_Date) values (50,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (26.00,'743206061',50);
+insert into Books (ISBN,Title) values('743244249','Cosmopolis: A Novel');
+insert into Author(ISBN,Name) values('743244249','Don DeLillo');
+insert into Publishers(Location,Phone,Name) values('','','Scribner');
+insert into Published (Publisher_Name,ISBN,Year) values('Scribner','743244249',2003);
+insert into Genre(ISBN,Name) values ('743244249','Literature & Fiction');
+insert into Orders(Order_ID,Purchase_Date) values (51,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (25.00,'743244249',51);
+insert into Books (ISBN,Title) values('743467523','Dreamcatcher');
+insert into Author(ISBN,Name) values('743467523','Stephen King');
+insert into Publishers(Location,Phone,Name) values('','','Pocket Books');
+insert into Published (Publisher_Name,ISBN,Year) values('Pocket Books','743467523',2003);
+insert into Genre(ISBN,Name) values ('743467523','Horror');
+insert into Orders(Order_ID,Purchase_Date) values (52,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (7.99,'743467523',52);
+insert into Books (ISBN,Title) values('375703764','House of Leaves');
+insert into Author(ISBN,Name) values('375703764','Mark Z. Danielewski');
+insert into Publishers(Location,Phone,Name) values('','','Pantheon Books');
+insert into Published (Publisher_Name,ISBN,Year) values('Pantheon Books','375703764',2000);
+insert into Genre(ISBN,Name) values ('375703764','Horror');
+insert into Orders(Order_ID,Purchase_Date) values (53,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (19.95,'375703764',53);
+insert into Books (ISBN,Title) values('345452089','The Vampire''s Violin');
+insert into Author(ISBN,Name) values('345452089','Michael Romkey');
+insert into Publishers(Location,Phone,Name) values('','','Del Rey');
+insert into Published (Publisher_Name,ISBN,Year) values('Del Rey','345452089',2003);
+insert into Genre(ISBN,Name) values ('345452089','Horror');
+insert into Orders(Order_ID,Purchase_Date) values (54,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (6.99,'345452089',54);
+insert into Books (ISBN,Title) values('385504470','Lullaby: A Novel');
+insert into Author(ISBN,Name) values('385504470','Chuck Palahniuk');
+insert into Publishers(Location,Phone,Name) values('','','Doubleday');
+insert into Published (Publisher_Name,ISBN,Year) values('Doubleday','385504470',2002);
+insert into Genre(ISBN,Name) values ('385504470','Horror');
+insert into Orders(Order_ID,Purchase_Date) values (55,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (17.47,'385504470',55);
+insert into Books (ISBN,Title) values('312276702','Jinn: A Novel');
+insert into Author(ISBN,Name) values('312276702','Matthew Delaney');
+
+insert into Published (Publisher_Name,ISBN,Year) values('St. Martin''s Press','312276702',2003);
+insert into Genre(ISBN,Name) values ('312276702','Horror');
+insert into Orders(Order_ID,Purchase_Date) values (56,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (24.95,'312276702',56);
+insert into Books (ISBN,Title) values('743457358','Everything''s Eventual: 14 Dark Tales');
+insert into Author(ISBN,Name) values('743457358','Stephen King');
+
+insert into Published (Publisher_Name,ISBN,Year) values('Pocket Books','743457358',2002);
+insert into Genre(ISBN,Name) values ('743457358','Horror');
+insert into Orders(Order_ID,Purchase_Date) values (57,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (7.99,'743457358',57);
+insert into Books (ISBN,Title) values('1880418568','Wolves of the Calla');
+insert into Author(ISBN,Name) values('1880418568','Stephen King');
+insert into Publishers(Location,Phone,Name) values('','','Donald M. Grant Publisher, Inc.');
+insert into Published (Publisher_Name,ISBN,Year) values('Donald M. Grant Publisher, Inc.','1880418568', Inc.);
+insert into Genre(ISBN,Name) values ('1880418568','Horror');
+insert into Orders(Order_ID,Purchase_Date) values (58,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (35.00,'1880418568',58);
+insert into Author(ISBN,Name) values('1880418568','Bernie Wrightson');
+insert into Books (ISBN,Title) values('743455967','On Writing');
+insert into Author(ISBN,Name) values('743455967','Stephen King');
+
+insert into Published (Publisher_Name,ISBN,Year) values('Pocket Books','743455967',2002);
+insert into Genre(ISBN,Name) values ('743455967','Horror');
+insert into Orders(Order_ID,Purchase_Date) values (59,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (7.99,'743455967',59);
+insert into Books (ISBN,Title) values('140077022','White Noise');
+insert into Author(ISBN,Name) values('140077022','Don DeLillo');
+
+insert into Published (Publisher_Name,ISBN,Year) values('Penguin USA','140077022',1991);
+insert into Genre(ISBN,Name) values ('140077022','Literature & Fiction');
+insert into Orders(Order_ID,Purchase_Date) values (60,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (14.00,'140077022',60);
+insert into Books (ISBN,Title) values('679722955','The Names');
+insert into Author(ISBN,Name) values('679722955','Don DeLillo');
+insert into Publishers(Location,Phone,Name) values('','','Vintage Books');
+insert into Published (Publisher_Name,ISBN,Year) values('Vintage Books','679722955',1989);
+insert into Genre(ISBN,Name) values ('679722955','Literature & Fiction');
+insert into Orders(Order_ID,Purchase_Date) values (61,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (11.20,'679722955',61);
+insert into Books (ISBN,Title) values('684848155','UNDERWORLD: A NOVEL');
+insert into Author(ISBN,Name) values('684848155','Don DeLillo');
+
+insert into Published (Publisher_Name,ISBN,Year) values('Scribner Paperback Fiction','684848155',1998);
+insert into Genre(ISBN,Name) values ('684848155','Literature & Fiction');
+insert into Orders(Order_ID,Purchase_Date) values (62,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (16.00,'684848155',62);
+insert into Books (ISBN,Title) values('471286168','Architecture: Form,Space,and Order');
+insert into Author(ISBN,Name) values('471286168','Francis D. K. Ching');
+
+insert into Published (Publisher_Name,ISBN,Year) values('John Wiley & Sons','471286168',1996);
+insert into Genre(ISBN,Name) values ('471286168','Home Design');
+insert into Orders(Order_ID,Purchase_Date) values (63,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (39.95,'471286168',63);
+insert into Books (ISBN,Title) values('471288217','A Visual Dictionary of Architecture');
+insert into Author(ISBN,Name) values('471288217','Francis D. K. Ching');
+
+insert into Published (Publisher_Name,ISBN,Year) values('John Wiley & Sons','471288217',1996);
+insert into Genre(ISBN,Name) values ('471288217','Home Design');
+insert into Orders(Order_ID,Purchase_Date) values (64,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (39.95,'471288217',64);
+insert into Books (ISBN,Title) values('156006219','The Magician''s Assistant');
+insert into Author(ISBN,Name) values('156006219','Ann Patchett');
+insert into Publishers(Location,Phone,Name) values('','','Harvest Books');
+insert into Published (Publisher_Name,ISBN,Year) values('Harvest Books','156006219',1998);
+insert into Genre(ISBN,Name) values ('156006219','Romance');
+insert into Orders(Order_ID,Purchase_Date) values (65,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (13.00,'156006219',65);
+insert into Books (ISBN,Title) values('60540753','Patron Saint of Liars');
+insert into Author(ISBN,Name) values('60540753','Ann Patchett');
+insert into Publishers(Location,Phone,Name) values('','','Harperperennial Library');
+insert into Published (Publisher_Name,ISBN,Year) values('Harperperennial Library','60540753',2003);
+insert into Genre(ISBN,Name) values ('60540753','Romance');
+insert into Orders(Order_ID,Purchase_Date) values (66,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (13.95,'60540753',66);
+insert into Books (ISBN,Title) values('393318486','How the Mind Works');
+insert into Author(ISBN,Name) values('393318486','Steven Pinker');
+insert into Publishers(Location,Phone,Name) values('','','W.W. Norton & Company');
+insert into Published (Publisher_Name,ISBN,Year) values('W.W. Norton & Company','393318486',1999);
+insert into Genre(ISBN,Name) values ('393318486','Science');
+insert into Orders(Order_ID,Purchase_Date) values (67,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (17.95,'393318486',67);
+insert into Books (ISBN,Title) values('60958332','The Language Instinct: How the Mind Creates Language');
+insert into Author(ISBN,Name) values('60958332','Steven Pinker');
+
+insert into Published (Publisher_Name,ISBN,Year) values('Perennial','60958332',2000);
+insert into Genre(ISBN,Name) values ('60958332','Science');
+insert into Orders(Order_ID,Purchase_Date) values (68,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (10.50,'60958332',68);
+insert into Books (ISBN,Title) values('60958405','Words and Rules: The Ingredients of Language');
+insert into Author(ISBN,Name) values('60958405','Steven Pinker');
+
+insert into Published (Publisher_Name,ISBN,Year) values('Perennial','60958405',2000);
+insert into Genre(ISBN,Name) values ('60958405','Science');
+insert into Orders(Order_ID,Purchase_Date) values (69,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (15.00,'60958405',69);
+insert into Books (ISBN,Title) values('393319407','The Diversity of Life');
+insert into Author(ISBN,Name) values('393319407','Edward Osborne Wilson');
+insert into Publishers(Location,Phone,Name) values('','','W.W. Norton & Company');
+insert into Published (Publisher_Name,ISBN,Year) values('W.W. Norton & Company','393319407',1999);
+insert into Genre(ISBN,Name) values ('393319407','Science');
+insert into Orders(Order_ID,Purchase_Date) values (70,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (16.95,'393319407',70);
+insert into Books (ISBN,Title) values('067463442X','On Human Nature');
+insert into Author(ISBN,Name) values('067463442X','Edward Osborne Wilson');
+insert into Publishers(Location,Phone,Name) values('','','Harvard Univ Pr');
+insert into Published (Publisher_Name,ISBN,Year) values('Harvard Univ Pr','067463442X',1988);
+insert into Genre(ISBN,Name) values ('067463442X','Science');
+insert into Orders(Order_ID,Purchase_Date) values (71,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (18.95,'067463442X',71);
+insert into Books (ISBN,Title) values('446608955','A Walk to Remember');
+insert into Author(ISBN,Name) values('446608955','Nicholas Sparks');
+
+insert into Published (Publisher_Name,ISBN,Year) values('Warner Books','446608955',2000);
+insert into Genre(ISBN,Name) values ('446608955','Literature & Fiction');
+insert into Orders(Order_ID,Purchase_Date) values (72,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (6.99,'446608955',72);
+insert into Books (ISBN,Title) values('446676098','The Notebook');
+insert into Author(ISBN,Name) values('446676098','Nicholas Sparks');
+
+insert into Published (Publisher_Name,ISBN,Year) values('Warner Books','446676098',1999);
+insert into Genre(ISBN,Name) values ('446676098','Literature & Fiction');
+insert into Orders(Order_ID,Purchase_Date) values (73,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (12.95,'446676098',73);
+insert into Books (ISBN,Title) values('446606812','Message in a Bottle');
+insert into Author(ISBN,Name) values('446606812','Nicholas Sparks');
+
+insert into Published (Publisher_Name,ISBN,Year) values('Warner Books','446606812',1999);
+insert into Genre(ISBN,Name) values ('446606812','Literature & Fiction');
+insert into Orders(Order_ID,Purchase_Date) values (74,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (7.50,'446606812',74);
+insert into Books (ISBN,Title) values('262521415','Numerical Techniques in Finance');
+insert into Author(ISBN,Name) values('262521415','Simon Benninga');
+
+insert into Published (Publisher_Name,ISBN,Year) values('MIT Press','262521415',1989);
+insert into Genre(ISBN,Name) values ('262521415','Accounting & Finance');
+insert into Orders(Order_ID,Purchase_Date) values (75,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (35.00,'262521415',75);
+insert into Books (ISBN,Title) values('262232197','Econometric Analysis of Cross Section and Panel Data');
+insert into Author(ISBN,Name) values('262232197','Jeffrey M. Wooldridge');
+
+insert into Published (Publisher_Name,ISBN,Year) values('MIT Press','262232197',2001);
+insert into Genre(ISBN,Name) values ('262232197','Accounting & Finance');
+insert into Orders(Order_ID,Purchase_Date) values (76,'2014-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (74.95,'262232197',76);
+insert into Books (ISBN,Title) values('324113641','Introductory Econometrics: A Modern Approach');
+insert into Author(ISBN,Name) values('324113641','Jeffrey M. Wooldridge');
+
+insert into Published (Publisher_Name,ISBN,Year) values('South-Western College Pub','324113641',2002);
+insert into Genre(ISBN,Name) values ('324113641','Accounting & Finance');
+insert into Orders(Order_ID,Purchase_Date) values (77,'2015-10-11');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (107.95,'324113641',77);
+insert into Books (ISBN,Title) values('471391123','Beyond Coso : Internal Control to Enhance Corporate Governance');
+insert into Author(ISBN,Name) values('471391123','Steven J. Root');
+
+insert into Published (Publisher_Name,ISBN,Year) values('John Wiley & Sons','471391123',2000);
+insert into Genre(ISBN,Name) values ('471391123','Accounting & Finance');
+insert into Orders(Order_ID,Purchase_Date) values (78,'2015-10-12');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (50.00,'471391123',78);
+insert into Books (ISBN,Title) values('130998516','Real World FPGA Design with Verilog');
+insert into Author(ISBN,Name) values('130998516','Ken Coffman');
+insert into Publishers(Location,Phone,Name) values('','','Prentice Hall PTR');
+insert into Published (Publisher_Name,ISBN,Year) values('Prentice Hall PTR','130998516',1999);
+insert into Genre(ISBN,Name) values ('130998516','Computer');
+insert into Orders(Order_ID,Purchase_Date) values (79,'2012-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (83.00,'130998516',79);
+insert into Books (ISBN,Title) values('1565924916','Ldap System Administration');
+insert into Author(ISBN,Name) values('1565924916','Gerald Carter');
+
+insert into Published (Publisher_Name,ISBN,Year) values('O''Reilly & Associates','1565924916',2003);
+insert into Genre(ISBN,Name) values ('1565924916','Computer');
+insert into Orders(Order_ID,Purchase_Date) values (80,'2013-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (39.95,'1565924916',80);
+insert into Books (ISBN,Title) values('735712360','The Photoshop Book for Digital Photographers');
+insert into Author(ISBN,Name) values('735712360','Scott Kelby');
+insert into Publishers(Location,Phone,Name) values('','','New Riders Publishing');
+insert into Published (Publisher_Name,ISBN,Year) values('New Riders Publishing','735712360',2003);
+insert into Genre(ISBN,Name) values ('735712360','Computer');
+insert into Orders(Order_ID,Purchase_Date) values (81,'2015-12-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (39.99,'735712360',81);
+insert into Books (ISBN,Title) values('735712379','Photoshop 7 Down & Dirty Tricks');
+insert into Author(ISBN,Name) values('735712379','Scott Kelby');
+
+insert into Published (Publisher_Name,ISBN,Year) values('New Riders Publishing','735712379',2002);
+insert into Genre(ISBN,Name) values ('735712379','Computer');
+insert into Orders(Order_ID,Purchase_Date) values (82,'2012-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (39.99,'735712379',82);
+insert into Books (ISBN,Title) values('735713170','Mac OS X v. 10.2 Jaguar Killer Tips');
+insert into Author(ISBN,Name) values('735713170','Scott Kelby');
+
+insert into Published (Publisher_Name,ISBN,Year) values('New Riders Publishing','735713170',2002);
+insert into Genre(ISBN,Name) values ('735713170','Computer');
+insert into Orders(Order_ID,Purchase_Date) values (83,'2015-11-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (29.99,'735713170',83);
+insert into Books (ISBN,Title) values('1558606432','Persuasive Technology: Using Computers to Change What We Think and Do');
+insert into Author(ISBN,Name) values('1558606432','B. J. Fogg');
+
+insert into Published (Publisher_Name,ISBN,Year) values('Morgan Kaufmann','1558606432',2002);
+insert into Genre(ISBN,Name) values ('1558606432','Computer');
+insert into Orders(Order_ID,Purchase_Date) values (84,'2005-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (34.95,'1558606432',84);
+insert into Books (ISBN,Title) values('72222743','A+ Certification All-in-One Exam Guide');
+insert into Author(ISBN,Name) values('72222743','Michael Meyers');
+
+insert into Published (Publisher_Name,ISBN,Year) values('McGraw-Hill Osborne Media','72222743',2002);
+insert into Genre(ISBN,Name) values ('72222743','Computer');
+insert into Orders(Order_ID,Purchase_Date) values (85,'2015-10-01');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (59.99,'72222743',85);
+insert into Books (ISBN,Title) values('345409469','The Demon-Haunted World: Science As a Candle in the Dark');
+insert into Author(ISBN,Name) values('345409469','Carl Sagan');
+insert into Publishers(Location,Phone,Name) values('','','Ballantine Books');
+insert into Published (Publisher_Name,ISBN,Year) values('Ballantine Books','345409469',1997);
+insert into Genre(ISBN,Name) values ('345409469','Science');
+insert into Orders(Order_ID,Purchase_Date) values (86,'2012-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (14.95,'345409469',86);
+insert into Books (ISBN,Title) values('375508325','Cosmos');
+insert into Author(ISBN,Name) values('375508325','Carl Sagan');
+
+insert into Published (Publisher_Name,ISBN,Year) values('Random House','375508325',2002);
+insert into Genre(ISBN,Name) values ('375508325','Science');
+insert into Orders(Order_ID,Purchase_Date) values (87,'2015-09-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (35.00,'375508325',87);
+insert into Books (ISBN,Title) values('345336895','Broca''s Brain: Reflections on the Romance of Science');
+insert into Author(ISBN,Name) values('345336895','Carl Sagan');
+
+insert into Published (Publisher_Name,ISBN,Year) values('Ballantine Books','345336895',1993);
+insert into Genre(ISBN,Name) values ('345336895','Science');
+insert into Orders(Order_ID,Purchase_Date) values (88,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (6.99,'345336895',88);
+insert into Books (ISBN,Title) values('671004107','Contact');
+insert into Author(ISBN,Name) values('671004107','Carl Sagan');
+
+insert into Published (Publisher_Name,ISBN,Year) values('Pocket Books','671004107',1997);
+insert into Genre(ISBN,Name) values ('671004107','Science');
+insert into Orders(Order_ID,Purchase_Date) values (89,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (7.99,'671004107',89);
+insert into Books (ISBN,Title) values('345376595','Pale Blue Dot: A Vision of the Human Future in Space');
+insert into Author(ISBN,Name) values('345376595','Carl Sagan');
+
+insert into Published (Publisher_Name,ISBN,Year) values('Ballantine Books','345376595',1997);
+insert into Genre(ISBN,Name) values ('345376595','Science');
+insert into Orders(Order_ID,Purchase_Date) values (90,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (12.95,'345376595',90);
+insert into Books (ISBN,Title) values('316666343','The Lovely Bones: A Novel');
+insert into Author(ISBN,Name) values('316666343','Alice Sebold');
+
+insert into Published (Publisher_Name,ISBN,Year) values('Little Brown & Company','316666343',2002);
+insert into Genre(ISBN,Name) values ('316666343','Literature & Fiction');
+insert into Orders(Order_ID,Purchase_Date) values (91,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (21.95,'316666343',91);
+insert into Books (ISBN,Title) values('316096199','Lucky: A Memoir');
+insert into Author(ISBN,Name) values('316096199','Alice Sebold');
+insert into Publishers(Location,Phone,Name) values('','','Back Bay Books');
+insert into Published (Publisher_Name,ISBN,Year) values('Back Bay Books','316096199',2002);
+insert into Genre(ISBN,Name) values ('316096199','Literature & Fiction');
+insert into Orders(Order_ID,Purchase_Date) values (92,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (11.95,'316096199',92);
+insert into Books (ISBN,Title) values('038572179X','Atonement');
+insert into Author(ISBN,Name) values('038572179X','Ian McEwan');
+insert into Publishers(Location,Phone,Name) values('','','Anchor Books');
+insert into Published (Publisher_Name,ISBN,Year) values('Anchor Books','038572179X',2003);
+insert into Genre(ISBN,Name) values ('038572179X','Literature & Fiction');
+insert into Orders(Order_ID,Purchase_Date) values (93,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (14.00,'038572179X',93);
+insert into Books (ISBN,Title) values('385494246','Amsterdam');
+insert into Author(ISBN,Name) values('385494246','Ian McEwan');
+
+insert into Published (Publisher_Name,ISBN,Year) values('Anchor Books','385494246',1999);
+insert into Genre(ISBN,Name) values ('385494246','Literature & Fiction');
+insert into Orders(Order_ID,Purchase_Date) values (94,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (12.00,'385494246',94);
+insert into Books (ISBN,Title) values('385494327','Black Dogs');
+insert into Author(ISBN,Name) values('385494327','Ian McEwan');
+
+insert into Published (Publisher_Name,ISBN,Year) values('Anchor Books','385494327',1999);
+insert into Genre(ISBN,Name) values ('385494327','Literature & Fiction');
+insert into Orders(Order_ID,Purchase_Date) values (95,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (14.00,'385494327',95);
+insert into Books (ISBN,Title) values('385494149','Enduring Love');
+insert into Author(ISBN,Name) values('385494149','Ian McEwan');
+
+insert into Published (Publisher_Name,ISBN,Year) values('Anchor Books','385494149',1999);
+insert into Genre(ISBN,Name) values ('385494149','Literature & Fiction');
+insert into Orders(Order_ID,Purchase_Date) values (96,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (13.00,'385494149',96);
+insert into Books (ISBN,Title) values('399149848','Birthright');
+insert into Author(ISBN,Name) values('399149848','Nora Roberts');
+insert into Publishers(Location,Phone,Name) values('','','Putnam Pub Group');
+insert into Published (Publisher_Name,ISBN,Year) values('Putnam Pub Group','399149848',2003);
+insert into Genre(ISBN,Name) values ('399149848','Literature & Fiction');
+insert into Orders(Order_ID,Purchase_Date) values (97,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (25.95,'399149848',97);
+insert into Books (ISBN,Title) values('373218192','Engaging The Enemy');
+insert into Author(ISBN,Name) values('373218192','Nora Roberts');
+insert into Publishers(Location,Phone,Name) values('','','Silhouette');
+insert into Published (Publisher_Name,ISBN,Year) values('Silhouette','373218192',2003);
+insert into Genre(ISBN,Name) values ('373218192','Literature & Fiction');
+insert into Orders(Order_ID,Purchase_Date) values (98,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (7.50,'373218192',98);
+insert into Books (ISBN,Title) values('373218257','Love By Design');
+insert into Author(ISBN,Name) values('373218257','Nora Roberts');
+
+insert into Published (Publisher_Name,ISBN,Year) values('Harlequin','373218257',2003);
+insert into Genre(ISBN,Name) values ('373218257','Literature & Fiction');
+insert into Orders(Order_ID,Purchase_Date) values (99,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (14.95,'373218257',99);
+insert into Books (ISBN,Title) values('399149392','Chesapeake Blue');
+insert into Author(ISBN,Name) values('399149392','Nora Roberts');
+
+insert into Published (Publisher_Name,ISBN,Year) values('Putnam Pub Group','399149392',2002);
+insert into Genre(ISBN,Name) values ('399149392','Literature & Fiction');
+insert into Orders(Order_ID,Purchase_Date) values (100,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (25.95,'399149392',100);
+insert into Books (ISBN,Title) values('1561584029','The Complete Illustrated Guide to Furniture and Cabinet Construction');
+insert into Author(ISBN,Name) values('1561584029','Andy Rae');
+
+insert into Published (Publisher_Name,ISBN,Year) values('Taunton Pr','1561584029',2001);
+insert into Genre(ISBN,Name) values ('1561584029','Home Design');
+insert into Orders(Order_ID,Purchase_Date) values (101,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (39.95,'1561584029',101);
+insert into Books (ISBN,Title) values('1579902944','Choosing & Using Hand Tools');
+insert into Author(ISBN,Name) values('1579902944','Andy Rae');
+insert into Publishers(Location,Phone,Name) values('','','Lark Books');
+insert into Published (Publisher_Name,ISBN,Year) values('Lark Books','1579902944',2002);
+insert into Genre(ISBN,Name) values ('1579902944','Home Design');
+insert into Orders(Order_ID,Purchase_Date) values (102,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (19.95,'1579902944',102);
+
+insert into Books (ISBN,Title) values('1561586196','Building a Shed');
+insert into Author(ISBN,Name) values('1561586196','Joseph Truini');
+
+insert into Published (Publisher_Name,ISBN,Year) values('Taunton Pr','1561586196',2003);
+insert into Genre(ISBN,Name) values ('1579902944','Home Design');
+insert into Orders(Order_ID,Purchase_Date) values (103,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (19.95,'1579902944',103);
+
+
+insert into Books (ISBN,Title) values('61092177','Small Gods');
+insert into Author(ISBN,Name) values('61092177','Terry Pratchett');
+insert into Publishers(Location,Phone,Name) values('','','Harper');
+insert into Published (Publisher_Name,ISBN,Year) values('Harper','61092177',1994);
+insert into Genre(ISBN,Name) values ('61092177','Home Design');
+insert into Orders(Order_ID,Purchase_Date) values (104,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (7.99,'61092177',104);
+
+insert into Books (ISBN,Title) values('60502935','Going Postal');
+insert into Author(ISBN,Name) values('60502935','Terry Pratchett');
+
+insert into Published (Publisher_Name,ISBN,Year) values('Harper','60502935',2005);
+insert into Genre(ISBN,Name) values ('60502935','Home Design');
+insert into Orders(Order_ID,Purchase_Date) values (105,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (7.99,'60502935',105);
+
+insert into Books (ISBN,Title) values('61020656','Pyramids');
+insert into Author(ISBN,Name) values('61020656','Terry Pratchett');
+
+insert into Published (Publisher_Name,ISBN,Year) values('Harper','61020656',2001);
+insert into Genre(ISBN,Name) values ('61020656','Home Design');
+insert into Orders(Order_ID,Purchase_Date) values (106,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (7.99,'61092177',106);
+
+insert into Books (ISBN,Title) values('60855925','The Color of Magic');
+insert into Author(ISBN,Name) values('60855925','Terry Pratchett');
+
+insert into Published (Publisher_Name,ISBN,Year) values('Harper','60855925',2005);
+insert into Genre(ISBN,Name) values ('60855925','Home Design');
+insert into Orders(Order_ID,Purchase_Date) values (107,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (13.99,'60855925',107);
+
+insert into Books (ISBN,Title) values('61020648','Guards! Guards!');
+insert into Author(ISBN,Name) values('61020648','Terry Pratchett');
+
+insert into Published (Publisher_Name,ISBN,Year) values('Harper','61020648',2005);
+insert into Genre(ISBN,Name) values ('61020648','Home Design');
+insert into Orders(Order_ID,Purchase_Date) values (108,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (7.99,'61020648',108);
+
+insert into Books (ISBN,Title) values('61161721','Unseen Academicals');
+insert into Author(ISBN,Name) values('61161721','Terry Pratchett');
+
+insert into Published (Publisher_Name,ISBN,Year) values('Harper','61161721',2010);
+insert into Genre(ISBN,Name) values ('61161721','Home Design');
+insert into Orders(Order_ID,Purchase_Date) values (109,'2015-10-10');
+insert into Contained_In (Purchase_Price, ISBN,Order_ID) values (7.99,'61092177',109);
+
+
+insert into Customer(Phone,Credit_Card,Sex,Address,Customer_ID,Interests,Birthday,First_Name,Middle_Name,Last_Name) values ('','','M','',1,'Science','2015-10-10','Bob','Joe','Junior');
+
+insert into Customer(Phone,Credit_Card,Sex,Address,Customer_ID,Interests,Birthday,First_Name,Middle_Name,Last_Name) values ('','','M','',2,'Engineering','2015-10-10','Billy','Sameul','Bob');
+
+insert into Customer(Phone,Credit_Card,Sex,Address,Customer_ID,Interests,Birthday,First_Name,Middle_Name,Last_Name) values ('1234567890','1234567891012','M','',3,'Science','2015-10-10','Lloyd','','Irving');
+
+insert into Customer(Phone,Credit_Card,Sex,Address,Customer_ID,Interests,Birthday,First_Name,Middle_Name,Last_Name) values ('6358745588','','M','8 Zaphias ST., Terca Lumeries',4,'Action','2015-10-10','Yuri','','Lowell');
+
+insert into Customer(Phone,Credit_Card,Sex,Address,Customer_ID,Interests,Birthday,First_Name,Middle_Name,Last_Name) values ('','','F','4 Mizuho, Tethealla',5,'History','2015-10-10','Sheena','','Fujibayashi');
+
+insert into Customer(Phone,Credit_Card,Sex,Address,Customer_ID,Interests,Birthday,First_Name,Middle_Name,Last_Name) values ('8675309','111111111','F','',6,'History','2015-10-10','Estellise','Sidos','Heurrassein');
+
+insert into Customer(Phone,Credit_Card,Sex,Address,Customer_ID,Interests,Birthday,First_Name,Middle_Name,Last_Name) values ('3256548790','25698412573014','M','4 Cruxis Drive, Derris Kharlan',7,'Fiction','2015-10-10','Kratos','','Aurion');
+
+insert into Customer(Phone,Credit_Card,Sex,Address,Customer_ID,Interests,Birthday,First_Name,Middle_Name,Last_Name) values ('','','M','',8,'Religion','2015-10-10','Chuck','joe','Norris');
+
+insert into Customer(Phone,Credit_Card,Sex,Address,Customer_ID,Interests,Birthday,First_Name,Middle_Name,Last_Name) values ('6874592103','888999444555666','M','50 Tor Harbor St., Terca Lumeries',9,'Warfare','2015-10-10','Regaey','','Yeager');
+
+insert into Customer(Phone,Credit_Card,Sex,Address,Customer_ID,Interests,Birthday,First_Name,Middle_Name,Last_Name) values ('','','F','Aspio',10,'Science','2015-10-10','Rita','','Mordio');
+
+insert into Customer(Phone,Credit_Card,Sex,Address,Customer_ID,Interests,Birthday,First_Name,Middle_Name,Last_Name) values ('','','F','Iselia',11,'Animals','2015-10-10','Collete','','Brunel');
+
+insert into Customer(Phone,Credit_Card,Sex,Address,Customer_ID,Interests,Birthday,First_Name,Middle_Name,Last_Name) values ('342135','146464','M','Dahngrest',12,'Monsters','2015-10-10','Karol','','Capel');
+
+insert into Customer(Phone,Credit_Card,Sex,Address,Customer_ID,Interests,Birthday,First_Name,Middle_Name,Last_Name) values ('','','M','Iselia',13,'Science','2015-10-10','Genis','','Sage');
+
+insert into Customer(Phone,Credit_Card,Sex,Address,Customer_ID,Interests,Birthday,First_Name,Middle_Name,Last_Name) values ('','','M','',14,'Business','2015-10-10','Schwan','','Oltorain');
+
+nsert into Customer(Phone,Credit_Card,Sex,Address,Customer_ID,Interests,Birthday,First_Name,Middle_Name,Last_Name) values ('','','F','',15,'Archeology','2015-10-10','Raine','','Sage');
+
+insert into Customer(Phone,Credit_Card,Sex,Address,Customer_ID,Interests,Birthday,First_Name,Middle_Name,Last_Name) values ('','','M','',16,'Science','2015-10-10','Jude','','Mathis');
+
+insert into Customer(Phone,Credit_Card,Sex,Address,Customer_ID,Interests,Birthday,First_Name,Middle_Name,Last_Name) values ('','','F','',17,'Literature','2015-10-10','Milla','','Maxwell');
+
+insert into Customer(Phone,Credit_Card,Sex,Address,Customer_ID,Interests,Birthday,First_Name,Middle_Name,Last_Name) values ('','','F','',18,'Forests','2015-10-10','Presea','','Combatir');
+
+insert into Customer(Phone,Credit_Card,Sex,Address,Customer_ID,Interests,Birthday,First_Name,Middle_Name,Last_Name) values ('','','M','',19,'Human Relations','2015-10-10','Zelos','','Wilder');
+
+insert into Customer(Phone,Credit_Card,Sex,Address,Customer_ID,Interests,Birthday,First_Name,Middle_Name,Last_Name) values ('','','M','',20,'Law','2015-10-10','Regal','','Bryant');
+
+insert into Purchased_By(Customer_ID,Order_ID) values(1,1);
+insert into Purchased_By(Customer_ID,Order_ID) values(2,2);
+insert into Purchased_By(Customer_ID,Order_ID) values(3,3);
+insert into Purchased_By(Customer_ID,Order_ID) values(3,3);
+insert into Purchased_By(Customer_ID,Order_ID) values(4,4);
+insert into Purchased_By(Customer_ID,Order_ID) values(5,5);
+insert into Purchased_By(Customer_ID,Order_ID) values(6,6);
+insert into Purchased_By(Customer_ID,Order_ID) values(7,7);
+insert into Purchased_By(Customer_ID,Order_ID) values(8,8);
+insert into Purchased_By(Customer_ID,Order_ID) values(9,9);
+insert into Purchased_By(Customer_ID,Order_ID) values(10,10);
+insert into Purchased_By(Customer_ID,Order_ID) values(11,11);
+insert into Purchased_By(Customer_ID,Order_ID) values(12,12);
+insert into Purchased_By(Customer_ID,Order_ID) values(13,13);
+insert into Purchased_By(Customer_ID,Order_ID) values(14,14);
+insert into Purchased_By(Customer_ID,Order_ID) values(18,30);
+insert into Purchased_By(Customer_ID,Order_ID) values(19,31);
+insert into Purchased_By(Customer_ID,Order_ID) values(20,15);
+insert into Purchased_By(Customer_ID,Order_ID) values(15,20);
+insert into Purchased_By(Customer_ID,Order_ID) values(16,19);
+insert into Purchased_By(Customer_ID,Order_ID) values(17,17);
+
+insert into Bookstore(Location,Phone) values('1 lame rd, Columbus, OH','');
+insert into Bookstore(Location,Phone) values('2 that rd, Athens, OH','');
+insert into Bookstore(Location,Phone) values('3 this rd, Over, OH','');
+insert into Bookstore(Location,Phone) values('4 Road rd, Laughlin, OH','');
+insert into Bookstore(Location,Phone) values('5 Steak rd, Stake, OH','');
+insert into Bookstore(Location,Phone) values('6 landlocked avenue, Port Nor, OH','');
+insert into Bookstore(Location,Phone) values('7 lame rd, Columbus, OH','');
+insert into Bookstore(Location,Phone) values('8 Dragons rd, Cave, OH','');
+insert into Bookstore(Location,Phone) values('9 llama Avenue, Nowhere, OH','');
+insert into Bookstore(Location,Phone) values('10 I Exist st., Existential, OH','');
+insert into Bookstore(Location,Phone) values('11 Rainbow rd, Mushroom, KD','');
+insert into Bookstore(Location,Phone) values('12 dirt trail, Somewhere, MO','');
+insert into Bookstore(Location,Phone) values('13 White house, Washington, DC','');
+insert into Bookstore(Location,Phone) values('14 Famous lane, Hollywood, IL','');
+insert into Bookstore(Location,Phone) values('15 Shady St., Hooserville, MI','');
+insert into Bookstore(Location,Phone) values('16 Alpaca, Texas City, OH','');
+insert into Bookstore(Location,Phone) values('17 Turtle rd, Idaho, OH','');
+insert into Bookstore(Location,Phone) values('18 Salamder rd, Desert, OH','');
+insert into Bookstore(Location,Phone) values('19 Electric Avenue, Dessert, OH','');
+insert into Bookstore(Location,Phone) values('20 Lost rd., Florida, OH','');
+
+insert into Stocked_At(Location,ISBN,Quantity) values ('20 Lost rd., Florida, OH','782140661',50);
+insert into Stocked_At(Location,ISBN,Quantity) values ('20 Lost rd., Florida, OH','72227885',75);
+insert into Stocked_At(Location,ISBN,Quantity) values ('19 Electric Avenue, Dessert, OH','972263608',75);
+insert into Stocked_At(Location,ISBN,Quantity) values ('20 Lost rd., Florida, OH','1558605525',85);
+insert into Stocked_At(Location,ISBN,Quantity) values ('20 Lost rd., Florida, OH','782140114',2);
+insert into Stocked_At(Location,ISBN,Quantity) values ('20 Lost rd., Florida, OH','805317554',10);
+insert into Stocked_At(Location,ISBN,Quantity) values ('20 Lost rd., Florida, OH','312287941',74);
+insert into Stocked_At(Location,ISBN,Quantity) values ('20 Lost rd., Florida, OH','316602051',52);
+insert into Stocked_At(Location,ISBN,Quantity) values ('20 Lost rd., Florida, OH','743222008',99);
+insert into Stocked_At(Location,ISBN,Quantity) values ('20 Lost rd., Florida, OH','373272839',9001);
+insert into Stocked_At(Location,ISBN,Quantity) values ('19 Electric Avenue, Dessert, OH','1586851357',23);
+insert into Stocked_At(Location,ISBN,Quantity) values ('20 Lost rd., Florida, OH','471363049',15);
+insert into Stocked_At(Location,ISBN,Quantity) values ('11 Rainbow rd, Mushroom, KD','446527793',72);
+insert into Stocked_At(Location,ISBN,Quantity) values ('11 Rainbow rd, Mushroom, KD','743206061',26);
+insert into Stocked_At(Location,ISBN,Quantity) values ('20 Lost rd., Florida, OH','345452089',1354);
+insert into Stocked_At(Location,ISBN,Quantity) values ('20 Lost rd., Florida, OH','743455967',451214);
+insert into Stocked_At(Location,ISBN,Quantity) values ('20 Lost rd., Florida, OH','60958332',13245);
+insert into Stocked_At(Location,ISBN,Quantity) values ('14 Famous lane, Hollywood, IL','471391123',125);
+insert into Stocked_At(Location,ISBN,Quantity) values ('14 Famous lane, Hollywood, IL','1558606432',0);
+insert into Stocked_At(Location,ISBN,Quantity) values ('14 Famous lane, Hollywood, IL','671004107',99);
+
+ALTER TABLE Customer ADD COLUMN email varchar(30);
+
+create index Publishers_Index on Publishers (Name ASC, Location ASC);
+create index Books_Index on Books (ISBN, Title);
+create index Bookstore_Index on Bookstore (Location);
+create index Order_Index on Orders (Order_Id);
+create index Customer_Index on Customer (Customer_Id, Interests, Last_Name);
+create index Purchased_By_Index on Purchased_By (Customer_ID, Order_ID);
+create index Contained_In_Index on Contained_In (Order_Id, ISBN);
+create index Stocked_At_Index on Stocked_At (ISBN, Location);
+create index Genre_Index on Genre (ISBN, Name);
+create index Author_Index on Author (ISBN, Name);
+create index Published_Index on Published (ISBN, Publisher_Name);
+
+
+
+
+
+
+
+
